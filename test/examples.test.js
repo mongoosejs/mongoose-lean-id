@@ -1,29 +1,22 @@
-# mongoose-lean-id
+'use strict';
 
-Attach `id` to the results of mongoose queries when using `.lean()`
+const assert = require('assert');
+const mongoose = require('mongoose');
+const mongooseLeanId = require('../');
 
-## Usage
+mongoose.connect('mongodb://localhost:27017/test');
 
-```javascript
-const mongooseLeanId = require('mongoose-lean-id');
-```
-
-
-# examples
-
-## It attaches `.id` to result of find, findOne, and findOneAndUpdate if lean
-
-```javascript
-
+describe('examples', function() {
+  it('attaches `.id` to result of find, findOne, and findOneAndUpdate if lean', function() {
     const schema = new mongoose.Schema({
       name: String
     });
 
-    schema.use(mongooseLeanId);
+    schema.plugin(mongooseLeanId);
 
     const Model = mongoose.model('Test', schema);
 
-    Model.create({ name: 'test' }).
+    return Model.create({ name: 'test' }).
       then(() => Promise.all([
         Model.find().lean(),
         Model.findOne().lean(),
@@ -35,7 +28,6 @@ const mongooseLeanId = require('mongoose-lean-id');
         assert.equal(findOneRes.id, findOneRes._id.toHexString());
         assert.equal(findOneAndUpdateRes.id,
           findOneAndUpdateRes._id.toHexString());
-      }).
-      then(() => done(), done);
-  
-```
+      });
+  });
+});
