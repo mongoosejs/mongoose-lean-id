@@ -2,6 +2,8 @@
 
 Attach `id` to the results of mongoose queries when using `.lean()`
 
+[![Build Status](https://semaphoreci.com/api/v1/vkarpov15/mongoose-lean-id/branches/master/badge.svg)](https://semaphoreci.com/vkarpov15/mongoose-lean-id)
+
 ## Usage
 
 ```javascript
@@ -19,11 +21,11 @@ const mongooseLeanId = require('mongoose-lean-id');
       name: String
     });
 
-    schema.use(mongooseLeanId);
+    schema.plugin(mongooseLeanId);
 
     const Model = mongoose.model('Test', schema);
 
-    Model.create({ name: 'test' }).
+    return Model.create({ name: 'test' }).
       then(() => Promise.all([
         Model.find().lean(),
         Model.findOne().lean(),
@@ -35,7 +37,6 @@ const mongooseLeanId = require('mongoose-lean-id');
         assert.equal(findOneRes.id, findOneRes._id.toHexString());
         assert.equal(findOneAndUpdateRes.id,
           findOneAndUpdateRes._id.toHexString());
-      }).
-      then(() => done(), done);
+      });
   
 ```
