@@ -4,8 +4,6 @@ const assert = require('assert');
 const mongoose = require('mongoose');
 const mongooseLeanId = require('../');
 
-mongoose.connect('mongodb://localhost:27017/test');
-
 describe('examples', function() {
   it('attaches `.id` to result of find, findOne, and findOneAndUpdate if lean', function() {
     const schema = new mongoose.Schema({
