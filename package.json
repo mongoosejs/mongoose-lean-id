@@ -25,8 +25,7 @@
     "acquit-markdown": "0.0.5",
     "istanbul": "0.4.5",
     "mocha": "3.2.0",
-    "mongoose": "4.x",
-    "underscore": "1.8.3"
+    "mongoose": "4.x"
   },
   "peerDependencies": {
     "mongoose": "4.x"
