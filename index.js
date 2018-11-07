@@ -14,7 +14,9 @@ function attachId(res) {
   function replaceId(res) {
     if (Array.isArray(res)) {
       res.forEach(v => {
-        v.id = v._id.toString();
+        if(v._id) {
+          v.id = v._id.toString();
+        }
         Object.keys(v).map(k => {
           if (Array.isArray(v[k])) {
             replaceId(v[k]);
@@ -22,7 +24,9 @@ function attachId(res) {
         });
       });
     } else {
-      res.id = res._id.toString();
+      if (res._id) {
+        res.id = res._id.toString();
+      }
       Object.keys(res).map(k => {
         if (Array.isArray(res[k])) {
           replaceId(res[k]);
