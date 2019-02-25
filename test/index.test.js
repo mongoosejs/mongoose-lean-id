@@ -30,7 +30,8 @@ describe('tests', function() {
     const Model = mongoose.model('gh3', schema);
 
     const oid = new mongoose.Types.ObjectId();
-    return Model.create({ name: 'foo', ids: [oid] }).
+    return Model.deleteMany({}).
+      then(() => Model.create({ name: 'foo', ids: [oid] })).
       then(() => Model.find().lean()).
       then(docs => {
         assert.equal(docs.length, 1);
