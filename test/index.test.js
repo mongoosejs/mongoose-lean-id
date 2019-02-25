@@ -19,4 +19,23 @@ describe('tests', function() {
       done();
     });
   });
+
+  it('handles arrays of objectids (gh-3)', function() {
+    const schema = new mongoose.Schema({
+      name: String,
+      ids: [mongoose.Schema.Types.ObjectId]
+    });
+    schema.plugin(mongooseLeanId);
+
+    const Model = mongoose.model('gh3', schema);
+
+    const oid = new mongoose.Types.ObjectId();
+    return Model.create({ name: 'foo', ids: [oid] }).
+      then(() => Model.find().lean()).
+      then(docs => {
+        assert.equal(docs.length, 1);
+        assert.equal(docs[0].ids.length, 1);
+        assert.equal(docs[0].ids[0], oid.toHexString());
+      });
+  });
 });
