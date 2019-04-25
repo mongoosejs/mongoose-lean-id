@@ -45,7 +45,7 @@ describe('examples', function() {
       then(() => Promise.all([
         Model.find().lean(),
         Model.findOne().lean(),
-        Model.findOneAndUpdate({}, { name: 'test', objects: [{ name: 'test2' }, { name: 'test3' }] }).lean()
+        Model.findOneAndUpdate({}, { name: 'test', objects: [{ name: 'test2' }, { name: 'test3' }] }, { new: true }).lean()
       ])).
       then(results => {
         Model.deleteMany();const [findRes, findOneRes, findOneAndUpdateRes] = results;
