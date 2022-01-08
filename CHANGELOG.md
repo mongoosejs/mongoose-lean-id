@@ -1,3 +1,7 @@
+0.3.0 / 2021-01-08
+==================
+ * feat: support Mongoose 6 #5
+
 0.2.0 / 2019-02-25
 ==================
  * fix: correctly ignore arrays of ObjectIds #3
