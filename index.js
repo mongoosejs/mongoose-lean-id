@@ -51,8 +51,10 @@ function isObjectId(v) {
     return false;
   }
   const proto = Object.getPrototypeOf(v);
-  if (proto == null || proto.constructor == null || proto.constructor.name !== 'ObjectID') {
+  if (proto == null ||
+      proto.constructor == null ||
+      proto.constructor.name !== 'ObjectId') {
     return false;
   }
-  return v._bsontype === 'ObjectID';
+  return v._bsontype === 'ObjectId';
 }

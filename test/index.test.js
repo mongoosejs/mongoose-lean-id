@@ -5,19 +5,16 @@ const mongoose = require('mongoose');
 const mongooseLeanId = require('../');
 
 describe('tests', function() {
-  it('handles no results for findOne', function(done) {
+  it('handles no results for findOne', async function() {
     const schema = new mongoose.Schema({
       name: String
     });
     schema.plugin(mongooseLeanId);
-
+    
     const Model = mongoose.model('gh1', schema);
-
-    Model.findOne({}).lean().exec(function(error, res) {
-      assert.ifError(error);
-      assert.ok(!res);
-      done();
-    });
+    
+    const res = await Model.findOne({}).lean().exec();
+    assert.ok(!res);
   });
 
   it('handles arrays of objectids (gh-3)', function() {
@@ -36,7 +33,9 @@ describe('tests', function() {
       then(docs => {
         assert.equal(docs.length, 1);
         assert.equal(docs[0].ids.length, 1);
-        assert.equal(docs[0].ids[0], oid.toHexString());
+
+        const id = docs[0].ids[0].toHexString();
+        assert.strictEqual(id, oid.toHexString());
       });
   });
 });
