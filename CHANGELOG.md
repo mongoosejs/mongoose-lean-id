@@ -1,3 +1,7 @@
+0.4.0 / 2023-03-21
+==================
+ * BREAKING CHANGE: support Mongoose 7, drop support for Mongoose < 7
+
 0.3.0 / 2021-01-08
 ==================
  * feat: support Mongoose 6 #5
