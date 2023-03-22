@@ -38,4 +38,27 @@ describe('tests', function() {
         assert.strictEqual(id, oid.toHexString());
       });
   });
+  it('supports findOneAndReplace', async function() {
+    const testSchema = new mongoose.Schema({
+      name: String
+    });
+    testSchema.plugin(mongooseLeanId);
+    const Test = mongoose.model('testreplace', testSchema);
+    const entry = await Test.create({ name: 'Test Testerson'});
+    const doc = await Test.findOneAndReplace({ _id: entry._id }, { name: 'Test' }, { returnDocument: 'after'}).lean();
+    assert.equal(doc.name, 'Test');
+    assert.equal(doc.id, doc._id.toString());
+
+  });
+  it('supports findOneAndDelete', async function() {
+    const testSchema = new mongoose.Schema({
+      name: String
+    });
+    testSchema.plugin(mongooseLeanId);
+    const Test = mongoose.model('testdelete', testSchema);
+
+    const entry = await Test.create({ name: 'Test Testerson' });
+    const doc = await Test.findOneAndDelete({ _id: entry._id }).lean();
+    assert.equal(doc.id, doc._id.toString())
+  });
 });
