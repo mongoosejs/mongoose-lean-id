@@ -4,6 +4,8 @@ module.exports = function mongooseLeanId(schema) {
   schema.post('find', attachId);
   schema.post('findOne', attachId);
   schema.post('findOneAndUpdate', attachId);
+  schema.post('findOneAndReplace', attachId);
+  schema.post('findOneAndDelete', attachId);
 };
 
 function attachId(res) {
