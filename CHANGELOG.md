@@ -1,3 +1,7 @@
+1.0.0 / 2023-11-30
+==================
+ * feat: support Mongoose 8 #10
+
 0.5.0 / 2023-03-23
 ==================
  * feat: support `findOneAndDelete()`, `findOneAndReplace()` #9 [IslandRhythms](https://github.com/IslandRhythms)
