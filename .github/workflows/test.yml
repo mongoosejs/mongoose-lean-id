@@ -8,12 +8,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        node: [18, 20, 22, 24]
-        os: [ubuntu-20.04]
-        include:
-          - os: ubuntu-20.04
-            mongo-os: ubuntu2004
-            mongo: 5.0.2
+        node: [20, 22, 24]
+        os: [ubuntu-latest]
+        mongo: [8.0.7]
     name: Node ${{ matrix.node }} MongoDB ${{ matrix.mongo }}
     steps:
       - uses: actions/checkout@v2
