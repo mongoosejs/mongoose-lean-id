@@ -1,6 +1,6 @@
 {
   "name": "mongoose-lean-id",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Attach `id` to the results of mongoose queries when using `.lean()`",
   "main": "index.js",
   "scripts": {
